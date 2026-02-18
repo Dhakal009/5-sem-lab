@@ -1,0 +1,61 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+.container{
+    background-image: url('./images/bg-intro-desktop.png');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-color: hsl(0, 100%, 74%);
+    font-family: "Poppins", sans-serif;
+    gap: 150px;
+}
+
+.content{
+    color:white;
+    width: 500px;
+    margin-top: 300px;
+}
+
+.content h1{
+    font-size: 45px;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+.input-box{
+    width: 600px;
+    margin-top: 150px;
+}
+
+.input-box .trail{
+    background-color: hsl(248, 32%, 49%);
+    color: hsl(246, 25%, 77%);
+    padding: 10px 60px 10px 140px;
+    font-size: 16px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 0 rgba(0, 0, 0, 0.15); 
+
+}
+.input-box .trail span{
+    color: white;
+}
+.box{
+    background-color: white;
+}
+.box form{
+    padding: 20px;
+}
+.box input{
+    width: 100%;
+    padding:15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size: 16px;
+}
