@@ -1,7 +1,11 @@
 // 2 tah output
 
+#define _GNU_SOURCE
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#pragma GCC diagnostic ignored "-Wimplicit-function-declaration"
 #include<stdio.h>
 #include<string.h>
+#include<stdlib.h>
 int main(){
     char pt[20], ct[20];
     int key, i;
