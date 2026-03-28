@@ -31,9 +31,9 @@ Algorithm
 
 
 #include <stdio.h>
-#include <limits.h>
 
 #define MAX_CUSTOMERS 20
+#define INT_MAX 2147483647
 
 typedef struct {
     int iat, at, st, start, ct, wt, tat, idle;
