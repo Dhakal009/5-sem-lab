@@ -1,78 +1,72 @@
-// Lab 5: Implementation of Markov Process
-// Activity 1: Implementation Coke vs. Pepsi Example for Markov Process
-//     • Given that a person’s last cola purchase was Coke, there is a 90% chance that his next cola purchase will also be Coke.
-//     • If a person’s last cola purchase was Pepsi, there is an 80% chance that his next cola purchase will also be Pepsi.
-//             T  =[ 0.9  0.1 
-// 	       0.2  0.8 ]
-//             For the above answer the following questions
-//   
+/*
+        Activity 1: Implementation Coke vs. Pepsi Example for Markov Process
+    • Given that a person’s last cola purchase was Coke, there is a 90% chance that his next cola purchase will also be Coke.
+    • If a person’s last cola purchase was Pepsi, there is an 80% chance that his next cola purchase will also be Pepsi.
+            T  =[ 0.9  0.1 
+	       0.2  0.8 ]
+            For the above answer the following questions
+    1. Given that a person is currently a Pepsi purchaser, what is the probability that he will purchase Coke two purchases from now?
+                  T2=    [0.83 0.17
+                          0.34  0.66]
+        Ans: 0.34
+    2.  Given that a person is currently a Coke purchaser,  what is the probability that he will purchase Pepsi three purchases from now?
+             Ans:  .219 
+    3. Suppose 60% of all people now drink Coke, and 40% drink Pepsi . What fraction of people will be drinking Coke after three purchase from now?
+               P0=[0.6, 0.4]
+               Pn=P0*T^n
+               P3= P0*T^3   =(0.6438,0.3562) 
+
+ STEP 1 : Take 2 by 2 matrix say T
+ Step2 : Ask for after how many times we need a prob of choice (say N)
+ STEP3: Multiply the transition matrix upto N times (T^N)
+ STE4: Pick the required index to get answer
+ step 5: display the answer
+*/
 
 
-//  STEP 1 : Take 2 by 2 matrix say T
-//  Step 2 : Ask for after how many times we need a prob of choice (say N)
-//  STEP 3: Multiply the transition matrix upto N times (T^N)
-//  STEp 4: Pick the required index to get answer
-//  step 5: display the answer
+
 
 #include <stdio.h>
 
-void multiply(float A[2][2], float B[2][2], float result[2][2]) {
-    result[0][0] = A[0][0] * B[0][0] + A[0][1] * B[1][0];
-    result[0][1] = A[0][0] * B[0][1] + A[0][1] * B[1][1];
-    result[1][0] = A[1][0] * B[0][0] + A[1][1] * B[1][0];
-    result[1][1] = A[1][0] * B[0][1] + A[1][1] * B[1][1];
+void multiply(float a[2][2], float b[2][2], float r[2][2]) {
+    r[0][0] = a[0][0] * b[0][0] + a[0][1] * b[1][0];
+    r[0][1] = a[0][0] * b[0][1] + a[0][1] * b[1][1];
+    r[1][0] = a[1][0] * b[0][0] + a[1][1] * b[1][0];
+    r[1][1] = a[1][0] * b[0][1] + a[1][1] * b[1][1];
 }
 
-void multiplyVector(float P[2], float T[2][2], float result[2]) {
-    result[0] = P[0]*T[0][0] + P[1]*T[1][0];
-    result[1] = P[0]*T[0][1] + P[1]*T[1][1];
+void multiplyVector(float p[2], float t[2][2], float r[2]) {
+    r[0] = p[0] * t[0][0] + p[1] * t[1][0];
+    r[1] = p[0] * t[0][1] + p[1] * t[1][1];
 }
 
 int main() {
-    float T[2][2];
-    printf("\nEnter the 2x2 transition matrix :\n");
-    for(int i=0;i<2;i++)
-        for(int j=0;j<2;j++)
-            scanf("%f", &T[i][j]);
+    float t[2][2], t2[2][2], t3[2][2], p0[2], p3[2];
+    int row, col;
 
-    // Question 1
-    int n1 = 2;
+    printf("\nEnter the 2x2 transition matrix:\n");
+    for (row = 0; row < 2; row++) {
+        for (col = 0; col < 2; col++) {
+            scanf("%f", &t[row][col]);
+        }
+    }
+
+    multiply(t, t, t2);     // T^2
+    multiply(t2, t, t3);    // T^3
+
     printf("\nQ1: Probability that a Pepsi purchaser will buy Coke after 2 purchases.\n");
-    float Tn[2][2], temp[2][2];
-    // Copy T to Tn
-    for(int i=0;i<2;i++) for(int j=0;j<2;j++) Tn[i][j] = T[i][j];
-    for(int step=1; step<n1; step++) {
-        multiply(Tn, T, temp);
-        for(int i=0;i<2;i++) for(int j=0;j<2;j++) Tn[i][j] = temp[i][j];
-    }
-    printf("T^2 Matrix:\n%.4f %.4f\n%.4f %.4f\n", Tn[0][0], Tn[0][1], Tn[1][0], Tn[1][1]);
-    printf("Probability (Pepsi -> Coke in 2 steps): %.4f\n", Tn[1][0]);
+    printf("T2 Matrix:\n%.4f %.4f\n%.4f %.4f\n", t2[0][0], t2[0][1], t2[1][0], t2[1][1]);
+    printf("Probability (Pepsi -> Coke in 2 steps): %.4f\n", t2[1][0]);
 
-    // Question 2
-    int n2 = 3;
-    printf("\nQ2: Probability that a Coke purchaser will buy Pepsi after 3 purchases.\n");   // Reset Tn to T
-    for(int i=0;i<2;i++) for(int j=0;j<2;j++) Tn[i][j] = T[i][j];
-    for(int step=1; step<n2; step++) {
-        multiply(Tn, T, temp);
-        for(int i=0;i<2;i++) for(int j=0;j<2;j++) Tn[i][j] = temp[i][j];
-    }
-    printf("T^3 Matrix:\n%.4f %.4f\n%.4f %.4f\n", Tn[0][0], Tn[0][1], Tn[1][0], Tn[1][1]);
-    printf("Probability (Coke -> Pepsi in 3 steps): %.4f\n", Tn[0][1]);
+    printf("\nQ2: Probability that a Coke purchaser will buy Pepsi after 3 purchases.\n");
+    printf("T3 Matrix:\n%.4f %.4f\n%.4f %.4f\n", t3[0][0], t3[0][1], t3[1][0], t3[1][1]);
+    printf("Probability (Coke -> Pepsi in 3 steps): %.4f\n", t3[0][1]);
 
-    // Question 3
     printf("\nQ3: Enter initial state distribution (Coke, Pepsi): ");
-    float P0[2];
-    scanf("%f %f", &P0[0], &P0[1]);
-    int n3 = 3;
-    // Reset Tn to T
-    for(int i=0;i<2;i++) for(int j=0;j<2;j++) Tn[i][j] = T[i][j];
-    for(int step=1; step<n3; step++) {
-        multiply(Tn, T, temp);
-        for(int i=0;i<2;i++) for(int j=0;j<2;j++) Tn[i][j] = temp[i][j];
-    }
-    float Pn[2] = {0, 0};
-    multiplyVector(P0, Tn, Pn);
-    printf("After 3 steps (Coke, Pepsi): (%.4f, %.4f)\n", Pn[0], Pn[1]);
+    scanf("%f %f", &p0[0], &p0[1]);
+
+    multiplyVector(p0, t3, p3);
+    printf("After 3 steps (Coke, Pepsi): (%.4f, %.4f)\n", p3[0], p3[1]);
 
     return 0;
 }

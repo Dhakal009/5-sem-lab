@@ -3,59 +3,44 @@
 */
 
 #include<stdio.h>
-#include<math.h>
+
 int main()
 {
-    int R[100],a=0,c=0,m,i=0,n=0,choice;
+    int R[100],a=0,c=0,m,i=0,n=0;
     printf("\nEnter the value of R[0]:");
     scanf("%d",&R[0]);
+    printf("Enter the value of multiplier 'a' :");
+    scanf("%d",&a);
+    printf("Enter the value of increment 'c' :");
+    scanf("%d",&c);
     printf("Enter the value of modulus 'm':");
     scanf("%d",&m);
     printf("Enter the number of random numbers to generate:");
     scanf("%d",&n);
-    printf("Choose the method to generate random numbers:\n1. Additive\n2. Multiplicative\n3. Mixed\n");
-    scanf("%d",&choice);
+    
 
-    switch(choice) {
-        case 1:
-            printf("Enter the value of increment 'c':");
-            scanf("%d",&c);
-            break;
-        case 2:
-            printf("Enter the value of multiplier 'a':");
-            scanf("%d",&a);
-            break;
-        case 3:
-            printf("Enter the value of multiplier 'a':");
-            scanf("%d",&a);
-            printf("Enter the value of increment 'c':");
-            scanf("%d",&c);
-            break;
-        default:
-            printf("Invalid choice! Exiting.\n");
-            return 1;
+    if(a==0 && c==0) {
+        printf("\nInvalid input.\n");
+        return 1;
     }
+
+    if(a==0)
+        printf("\nAdditive LCG\n");
+    else if(c==0)
+        printf("\nMultiplicative LCG\n");
+    else
+        printf("\nMixed LCG\n");
 
     for(i=1;i<=n;i++)
     {
-        switch(choice) {
-            case 1: // Additive
-                R[i] = (R[i-1] + c) % m;
-                break;
-            case 2: // Multiplicative
-                R[i] = (a * R[i-1]) % m;
-                break;
-            case 3: // Mixed
-                R[i] = (a * R[i-1] + c) % m;
-                break;
-        }
+        R[i] = (a * R[i-1] + c) % m;
     }
     
     printf("\nThe generated random numbers are:\n");
     for(i=0;i<=n;i++)
     {
         printf("%d ",R[i]);
-        if(R[i+1]==R[0])
+        if(i<n && R[i+1]==R[0])
         {
             printf("\nCycle length is: %d\n",i);
             break;

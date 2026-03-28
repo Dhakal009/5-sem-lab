@@ -37,7 +37,7 @@ void sort(float arr[], int n) {
 int main() {
     int N, i;
     float R[100], Dplus[100], Dminus[100];
-    float Dplus_max = 0.0, Dminus_max = 0.0, D, Dalpha;
+    float Dplus_max = 0.0, Dminus_max = 0.0, D, D_alpha;
 
     // Step 1: Input number of random numbers
     printf("Enter number of random numbers (N): ");
@@ -77,21 +77,21 @@ int main() {
 
     // Display results
     printf("\n\n|  i  |   R[i]   |   D+    |   D-    |\n");
-    printf("----------------------------------------\n");
+    printf("\n");
     for(i = 0; i < N; i++) {
         printf("| %3d | %7.3f | %7.3f | %7.3f |\n", i+1, R[i], Dplus[i], Dminus[i]);
     }
-    printf("----------------------------------------\n");
+    printf("\n");
     printf("\nD+ max = %.3f", Dplus_max);
     printf("\nD- max = %.3f", Dminus_max);
     printf("\nD = %.3f", D);
 
     // Step 7: Input Dalpha
-    printf("\n\nEnter tabulated value (Dalpha): ");
-    scanf("%f", &Dalpha);
+    printf("\n\nEnter tabulated value (D alpha): ");
+    scanf("%f", &D_alpha);
 
     // Step 8: Decision
-    if(D < Dalpha) {
+    if(D < D_alpha) {
         printf("\n\nResult: Null Hypothesis[H0] cannot be rejected.\n");
         printf(" Ri~U[0,1] Numbers are uniformly distributed.\n");
     } else {

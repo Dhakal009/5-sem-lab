@@ -2,7 +2,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 
 int main() {
     int k, n = 100;
@@ -11,8 +10,6 @@ int main() {
     float expected, chi_square = 0.0;
     float tabulated;
     int i, j;
-
-    srand(time(0));
 
     printf("100 Generated Random Numbers:\n");
     for (i = 0; i < n; i++) {
@@ -38,7 +35,7 @@ int main() {
     }
 
     printf("\n%-12s %-16s %s\n", "Interval", "Range", "Numbers");
-    printf("----------------------------------------------------------------------\n");
+    printf("\n");
     for (i = 0; i < k; i++) {
         printf("%-12d (%.2f - %.2f)   ", i + 1, (float)i / k, (float)(i + 1) / k);
         for (j = 0; j < count[i]; j++)
@@ -49,7 +46,7 @@ int main() {
     expected = (float)n / k;
 
     printf("\n%-12s %-12s %-12s %-12s\n", "Interval", "Observed", "Expected", "(O-E)^2/E");
-    printf("-------------------------------------------------------\n");
+    printf("\n");
 
     for (i = 0; i < k; i++) {
         float diff = observed[i] - expected;
@@ -58,7 +55,7 @@ int main() {
         printf("%-12d %-12.0f %-12.2f %-12.4f\n", i + 1, observed[i], expected, chi_i);
     }
 
-    printf("-------------------------------------------------------\n\n");
+    printf("\n\n");
 
     int df = k - 1;
     printf("H0 : Numbers are uniformly distributed\n");

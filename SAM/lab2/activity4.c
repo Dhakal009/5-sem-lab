@@ -3,7 +3,6 @@
 */
 
 #include<stdio.h>
-#include<stdlib.h>
 
 int main()
 {
@@ -21,18 +20,10 @@ int main()
     printf("Enter modulus m: ");
     scanf("%d", &m);
 
-    if (m <= 1) {
-        printf("Modulus m must be greater than 1.\n");
-        return 1;
-    }
 
     printf("Enter how many different x0 values you want to test: ");
     scanf("%d", &seedCount);
 
-    if (seedCount <= 0) {
-        printf("Number of seeds must be positive.\n");
-        return 1;
-    }
 
     for (i = 0; i < seedCount; i++) {
         int x0Input;
@@ -41,16 +32,8 @@ int main()
         int step;
         int cycleStart;
         int cycleLength;
-
-        int *seen = (int *)malloc(sizeof(int) * m);
-        int *sequence = (int *)malloc(sizeof(int) * (m + 1));
-
-        if (seen == NULL || sequence == NULL) {
-            printf("Memory allocation failed.\n");
-            free(seen);
-            free(sequence);
-            return 1;
-        }
+        int seen[m];
+        int sequence[m + 1];
 
         printf("\nEnter x0 for seed %d: ", i + 1);
         scanf("%d", &x0Input);
@@ -98,7 +81,6 @@ int main()
         for (int j = 0; j <= step; j++) {
             printf("%d ", sequence[j]);
         }
-        printf("\nCycle starts after %d number(s)\n", cycleStart);
         printf("Cycle length for x0 = %d is %d\n", x0Input, cycleLength);
 
         if (minCycleLength == -1 || cycleLength < minCycleLength) {
@@ -110,9 +92,6 @@ int main()
             maxCycleLength = cycleLength;
             maxSeed = x0Input;
         }
-
-        free(seen);
-        free(sequence);
     }
 
     printf("\nSummary:\n");

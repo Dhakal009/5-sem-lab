@@ -16,6 +16,8 @@ int main(){
     int R[100];
     int a,c,m,n;
     int i=0;
+    double sum = 0.0;
+    double mean, variance = 0.0;
     printf("Enter value of R0: ");
     scanf("%d",&R[0]);
     printf("Enter value of multiplier a: ");
@@ -26,14 +28,28 @@ int main(){
     scanf("%d",&m);
     printf("Enter number of random numbers to generate: ");
     scanf("%d",&n);
-    while(i<n){
-        R[i+1] = (a*R[i] + c) % m;
-        i++;
+
+
+    for(i=1;i<n;i++){
+        R[i] = (a*R[i-1] + c) % m;
     }
+
     printf("Generated random numbers: ");
     for(i=0;i<n;i++){
         printf("%d ",R[i]);
+        sum += R[i];
     }
+
+    mean = sum / n;
+
+    for(i=0;i<n;i++){
+        variance += (R[i] - mean) * (R[i] - mean);
+    }
+    variance /= n;
+
     printf("\n");
+    printf("Mean = %.4f\n", mean);
+    printf("Variance = %.4f\n", variance);
+
     return 0;   
 }
