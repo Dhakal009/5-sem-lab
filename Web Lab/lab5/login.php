@@ -1,13 +1,11 @@
 <?php
 
+    require_once "./connection.php";
+
     // handle post request
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
     
         $formData = $_POST;
-
-        $registerdUser= [
-            'bikashdhakal546@gmail.com'=>'bikash123'
-        ];
 
         $email = trim($formData['email'] ?? '');
         $password = trim($formData['password'] ?? '');
@@ -20,10 +18,18 @@
             $errors['email'] = 'Email is required';
         }else if(filter_var($email, FILTER_VALIDATE_EMAIL) === false){
             $errors['email'] = 'Invalid email format';
+        }else{
+            $userExistSql = "select *from users where email = ?";
+            $userExistStmt = $connection->prepare($userExistSql);
+            $userExistStmt->bind_param("s", $email);
+            $userExistStmt->execute();
+            $result = $userExistStmt->get_result();
+
+            if($result->num_rows === 0){
+                $errors['email'] = 'Email not found';
+            }
         }
-        else if(!in_array($email, array_keys($registerdUser))){
-            $errors['email'] = 'Email is not registered';
-        }
+        
 
 
         //password validation
@@ -40,7 +46,14 @@
             //form is valid. Proceed 
 
             // check password
-            if($registerdUser[$email] === $password){
+            $userSql = "select *from users where email = ? AND password = ?";
+            $userStmt = $connection->prepare($userSql);
+            $userStmt->bind_param("ss", $email, $password);
+            $userStmt->execute();
+            $result = $userStmt->get_result();
+
+            if($result->num_rows > 0){
+                $_SESSION['userIslogin'] = true;
                 header("Location: /home.php");
                 exit;
             } else {

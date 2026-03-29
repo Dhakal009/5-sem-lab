@@ -6,7 +6,12 @@
     <title>Document</title>
 </head>
 <body>
+    
+
     <h1>HOME PAGE</h1>
+    <br><br>
+
+    <a href="/login.php">Logout</a>
 
 </body>
 </html>
