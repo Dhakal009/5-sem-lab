@@ -44,13 +44,19 @@ void floydWarshall(int graph[50][50], int V) {
 }
 
 int main() {
-    int V = 4;
-    int graph[50][50] = {
-        {0, 5, 0, 10},
-        {0, 0, 3, 0},
-        {0, 0, 0, 1},
-        {0, 0, 0, 0}
-    };
+    int V;
+    cout << "Enter number of vertices: ";
+    if (!(cin >> V) || V <= 0 || V > 50) {
+        cerr << "Invalid number of vertices\n";
+        return 1;
+    }
+    int graph[50][50] = {0};
+    cout << "Enter adjacency matrix (use 0 for no edge):\n";
+    for (int i = 0; i < V; i++) {
+        for (int j = 0; j < V; j++) {
+            cin >> graph[i][j];
+        }
+    }
     floydWarshall(graph, V);
     return 0;
 }

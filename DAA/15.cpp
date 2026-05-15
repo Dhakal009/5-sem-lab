@@ -33,7 +33,7 @@ int main()
 
     for(i=0;i<e;i++)
     {
-        cout<<"\nEnter edge "<<i+1<<" (u v): ",
+        cout<<"\nEnter edge "<<i+1<<" (u v): ";
         cin>>u[i]>>v[i];
         cout<<"Enter weight of edge "<<u[i]<<" - "<<v[i]<<": ";
         cin>>w[i];
@@ -52,7 +52,7 @@ int main()
     for(i=0;i<n;i++)
         parent[i]=i;
 
-    cout<<"\n..............Kruskal's MST Process.............."<<endl;
+    cout<<"\nKruskal's MST Process:"<<endl;
     cout<<"\nEdges considered in order:"<<endl;
 
     for(i=0;i<e;i++)
@@ -77,7 +77,7 @@ int main()
             break;
     }
 
-    cout<<"\n..............Minimum Spanning Tree.............."<<endl;
+    cout<<"\nMinimum Spanning Tree:"<<endl;
     cout<<"\nEdge\tWeight"<<endl;
     for(i=0;i<mstEdges;i++)
         cout<<mstu[i]<<" - "<<mstv[i]<<"\t"<<mstw[i]<<endl;

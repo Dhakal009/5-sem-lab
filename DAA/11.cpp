@@ -1,6 +1,6 @@
 //  WAP to implement randomized quick sort.
 #include <iostream>
-#include <cstdlib>
+
 using namespace std;    
 void swap(int &a, int &b) {
     int temp = a;

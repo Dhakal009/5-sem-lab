@@ -23,8 +23,18 @@ int matrixChainOrder(int p[], int n) {
 }
 
 int main() {
-    int p[] = {1, 2, 3, 4, 5};
-    int n = sizeof(p) / sizeof(p[0]) - 1;
-    cout << "Minimum number of multiplications is " << matrixChainOrder(p, n) << endl;
+    int n;
+    cout << "Enter the number of matrices: ";
+    cin >> n;
+    
+    int p[100];
+    cout << "Enter the dimensions (p[0] to p[" << n << "]): " << endl;
+    for (int i = 0; i <= n; i++) {
+        cin >> p[i];
+    }
+    
+    int result = matrixChainOrder(p, n);
+    cout << "\nMinimum number of  multiplications is: " << result << endl;
+    
     return 0;
 }

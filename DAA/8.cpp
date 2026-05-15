@@ -15,7 +15,7 @@ void findMinMax(int arr[], int n, int &min, int &max) {
     }
     for (int i = 2; i < n; i++) {
         if (arr[i] < min) {
-            min = arr[i];
+            min = arr[i]; 
         } else if (arr[i] > max) {
             max = arr[i];
         }

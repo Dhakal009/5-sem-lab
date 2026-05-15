@@ -21,10 +21,17 @@
         </xs:complexType>
       </xs:element>
       <xs:element name="price" type="xs:decimal" use="required"/>
-      <xs:element name="published_year" type="xs:date" use="required"/>
+      <xs:element name="published_year" type="xs:date" use="optional"/>
     </xs:sequence>
     <xs:attribute name="isbn" type="xs:ID" use="required"/>
-    <xs:attribute name="category" type="xs:string" use="optional"/>
+    <xs:attribute name="category">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="Fiction"/>
+                <xs:enumeration value="History"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:attribute>
   </xs:complexType>
 
 </xs:schema>

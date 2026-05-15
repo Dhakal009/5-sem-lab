@@ -20,7 +20,7 @@ int main() {
     for (int i = 0; i < n; i++) {
         if (arr[i] == key) {
             found = true;
-            cout << "Key found at index: " << i << endl;
+            cout <<"Key found at index: "<< i << endl;
             break;
         }
     }

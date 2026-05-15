@@ -19,7 +19,7 @@ int main()
     scanf("%d",&n);
     
 
-    if(a==0 && c==0) {
+    if(a==0 && c==0) {2
         printf("\nInvalid input.\n");
         return 1;
     }
