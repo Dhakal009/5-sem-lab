@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap" rel="stylesheet">
+  <title>Typing Speed Test</title>
+
+</head>
+
+<body>
+  <img class="bg-pattern bg-pattern-top" src="./assets/images/pattern-confetti.svg" alt="" aria-hidden="true">
+  <img class="bg-pattern bg-pattern-star-left" src="./assets/images/pattern-star-1.svg" alt="" aria-hidden="true">
+  <img class="bg-pattern bg-pattern-star-right" src="./assets/images/pattern-star-2.svg" alt="" aria-hidden="true">
+
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <img class="brand-logo brand-logo-large" src="./assets/images/logo-large.svg" alt="Typing Speed Test">
+        <img class="brand-logo brand-logo-small" src="./assets/images/logo-small.svg" alt="Typing Speed Test">
+      </div>
+
+      <div class="personal-best" aria-live="polite">
+        <img src="./assets/images/icon-personal-best.svg" alt="">
+        <span>Personal best:</span>
+        <strong id="personal-best-value">0 WPM</strong>
+      </div>
+    </header>
+
+    <section class="stats-panel" id="statsPanel">
+      <div class="stats-left">
+        <div class="stat-item">
+          <span class="stat-label">WPM:</span>
+          <strong id="stat_wpm">0</strong>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Accuracy:</span>
+          <strong id="stat_accuracy">100%</strong>
+        </div>
+        <div class="stat-item stat-item-time">
+          <span class="stat-label">Time:</span>
+          <strong id="stat_time">0:60</strong>
+        </div>
+      </div>
+
+      <div class="stats-right">
+        <div class="chip-group">
+          <span class="group-label">Difficulty:</span>
+          <button class="chip active" type="button" data-difficulty="easy">Easy</button>
+          <button class="chip" type="button" data-difficulty="medium">Medium</button>
+          <button class="chip" type="button" data-difficulty="hard">Hard</button>
+        </div>
+
+        <div class="chip-group">
+          <span class="group-label">Mode:</span>
+          <button class="chip active" type="button" data-mode="timed">Timed (60s)</button>
+          <button class="chip" type="button" data-mode="passage">Passage</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="typing-stage" id="typingStage">
+      <div class="passage-panel" id="passagePanel">
+        <p class="passage blurred" id="texts"></p>
+
+        <div class="starter" id="starter">
+          <button class="primary-btn" id="startBtn" type="button">Start Typing Test</button>
+          <p>Or click the text and start typing</p>
+        </div>
+      </div>
+
+      <input id="hidden-input" class="hidden-input" type="text" autocomplete="off" autocapitalize="off"
+        spellcheck="false" aria-label="Typing input">
+
+      <div class="restart-row hidden" id="typingRestartRow">
+        <button class="restart-btn" id="typingRestartBtn" type="button">
+          <span>Restart Test</span>
+          <img src="./assets/images/icon-restart.svg" alt="">
+        </button>
+      </div>
+    </section>
+
+    <section class="results-panel" id="resultsPanel" hidden>
+      <img id="resultIcon" class="result-icon" src="./assets/images/icon-completed.svg" alt="">
+      <h2 id="resultTitle">Test Complete!</h2>
+      <p id="resultSubtitle">Solid run. Keep pushing to beat your high score.</p>
+
+      <div class="result-metrics">
+        <div class="metric-card">
+          <span class="metric-label">WPM:</span>
+          <strong id="resultWpm">0</strong>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Accuracy:</span>
+          <strong id="resultAccuracy">0%</strong>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Characters</span>
+          <strong id="resultCharacters"><span class="positive">0</span><span class="negative">/0</span></strong>
+        </div>
+      </div>
+
+      <button class="restart-btn restart-btn-results" id="restartBtn" type="button">
+        <span>Restart Test</span>
+        <img src="./assets/images/icon-restart.svg" alt="">
+      </button>
+    </section>
+  </main>
+
+  <script src="./script.js"></script>
+</body>
+
+</html>
